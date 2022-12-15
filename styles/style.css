@@ -1594,6 +1594,15 @@ button.default-white-button.start-tutorial, .button.default-white-button.start-t
   transform: translateX(-50%);
 }
 
+#costMessage {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -100;
+  font-size: 28px;
+}
+
 .nonselectable {
   user-select: none;
   -moz-user-select: none;

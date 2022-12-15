@@ -61,15 +61,14 @@
     */
 
     /* PROLIFIC PARAMETERS */
-
     var ProlificID = getUrlVars()['PROLIFIC_PID'];
     // NOTE ADD COMPLETION CODE HERE!
     var completionCode = "CPF5ZVK4";
     var completionURL = "https://app.prolific.co/submissions/complete?cc=" + completionCode;
     var PHQexclusionURL = "https://app.prolific.co/submissions/complete?cc=EXCLU001";
 
-    /* EXPERIMENT INFORMATION */
 
+    /* EXPERIMENT INFORMATION */
     var subjectID;
     var studyName = 'Information seeking & confidence';
     var version = 'first pilot';
@@ -114,106 +113,37 @@
     Math.seedrandom(seed);
 
 
-    /*randomise trial type order*/
-    // var conditionRandomiser = Math.random();
-    var colorRandomiser = Math.random();
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////// SET CONDITION ORDER HERE AND MAKE SURE IT IS BALANCED!!!!!!!!!!!!!!!!!!!!!!!!!! ///////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // // conditionRandomiser = 1; // VALUE CONDITION FIRST
-    // conditionRandomiser = 0.1; // ACCURACY CONDITION FIRST
-    //
-    // if (conditionRandomiser > 0.5) {
-    //     //value value first
-    //     if (colorRandomiser > 0.5) {
-    //         //blue
-    //         trialTypeOrder = "VNB"; //Value Nothing Blue
-    //     } else {
-    //         //red
-    //         trialTypeOrder = "VNR"; //Value Nothing Red
-    //     }
-    // } else {
-    //     //value nothing first
-    //     if (colorRandomiser > 0.5) {
-    //         //blue
-    //         trialTypeOrder = "NVB" //Nothing Value Blue
-    //     } else {
-    //         //red
-    //         trialTypeOrder = "NVR" //Nothing Value Red
-    //     }
-    // }
-
-    // trialTypeOrder = "VNR";
-    trialTypeOrder = "NVR";
+    /* TRIAL TYPE ORDER */
+    trialTypeOrder = "testing";
     // trialTypeOrder = "testing";
 
 
     /*set trial types (mean diff x variance conditions) to make sure they are balanced*/
-    //check how to make number of trials right here, exclude the practice where we just use level 3
-    var trialsPractice1 = 60; // SET THIS TO 60
-    var trialsPractice2 = 30; // SET THIS TO 30
-    var trialsPerBlock = 54; // SET THIS TO 54
-    var numberOfBlocks = 3; // this is actually done manually later in the trial order but just declaring here to know what is happening and for instructions
+    var trialsPractice1 = 6; // SET THIS TO 60
+    var trialsPractice2 = 3; // SET THIS TO 30
+    var trialsPerBlock = 3; //  SET THIS TO 36 (9 block, i.e. 324 trials, same as before where we had 54 trials and 6 blocks)  // NEEDS TO BE SOMETHING DIVISIBLE BY 3
+    var numberOfBlocks = 9;
 
     var repeats_practice2 = Math.ceil(trialsPractice2 / 9);
-    var repeats = Math.ceil(trialsPerBlock * numberOfBlocks / 9); // divided by 9 for the 3 mean levels (1,3,5) and 3 variance levels (.0333, .1, .1666)
+    var repeats = Math.ceil(trialsPerBlock / 3); // divided by 3 for the 3 mean levels (1,3,5)
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // VERSION 2
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*    var color_conditions_demo = [[40, .1], [40, .1], [30, .1], [30, .1], [20, .1]]; // 5 super easy trials to begin
-    var color_conditions_practice1 = Array(trialsPractice1-color_conditions_demo.length).fill([[8, .1]]).flat(1);
+    var color_conditions_demo = [[40, .1], [40, .1], [30, .1], [30, .1], [20, .1]]; // 5 super easy trials to begin
+    var color_conditions_practice1 = Array(trialsPractice1-color_conditions_demo.length).fill([[2, .1]]).flat(1); // staircase on hardest version (meandif = 2)
     color_conditions_practice1 = color_conditions_demo.concat(color_conditions_practice1);
-    var color_conditions_practice2 = shuffle(Array(repeats_practice2).fill([[2, .0333], [2, .1], [2, .1666], [8, .0333], [8, .1], [8, .1666], [14, .0333], [14, .1], [14, .1666]]).flat(1)).slice(0, trialsPractice2);
+    var color_conditions_practice2 = shuffle(Array(repeats_practice2).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPractice2);
     color_conditions_practice = color_conditions_practice1.concat(color_conditions_practice2);
-    var color_conditions_1 = shuffle(Array(repeats).fill([[2, .0333], [2, .1], [2, .1666], [8, .0333], [8, .1], [8, .1666], [14, .0333], [14, .1], [14, .1666]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks); // no1 is for first condition (value/accuracy) delete too many trials from end
-    var color_conditions_2 = shuffle(Array(repeats).fill([[2, .0333], [2, .1], [2, .1666], [8, .0333], [8, .1], [8, .1666], [14, .0333], [14, .1], [14, .1666]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks);  // no2 is for second condition (value/accuracy) delete too many trials from end
 
-    var color_conditions = color_conditions_practice.concat(color_conditions_1);
-    color_conditions = color_conditions.concat(color_conditions_2);*/
+    var color_conditions_1 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 1
+    var color_conditions_2 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 2
+    var color_conditions_3 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 3
+    var color_conditions_4 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 4
+    var color_conditions_5 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 5
+    var color_conditions_6 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 6
+    var color_conditions_7 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 7
+    var color_conditions_8 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 8
+    var color_conditions_9 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 9
 
-
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // // VERSION 3 without variance manipulation and staircasing on the hardest version!
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // var color_conditions_demo = [[40, .1], [40, .1], [30, .1], [30, .1], [20, .1]]; // 5 super easy trials to begin
-    // var color_conditions_practice1 = Array(trialsPractice1-color_conditions_demo.length).fill([[2, .1]]).flat(1);
-    // color_conditions_practice1 = color_conditions_demo.concat(color_conditions_practice1);
-    // var color_conditions_practice2 = shuffle(Array(repeats_practice2).fill([[2, .1], [2, .1], [2, .1], [8, .1], [8, .1], [8, .1], [14, .1], [14, .1], [14, .1]]).flat(1)).slice(0, trialsPractice2);
-    // color_conditions_practice = color_conditions_practice1.concat(color_conditions_practice2);
-    // var color_conditions_1 = shuffle(Array(repeats).fill([[2, .1], [2, .1], [2, .1], [8, .1], [8, .1], [8, .1], [14, .1], [14, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks); // no1 is for first condition (value/accuracy) delete too many trials from end
-    // var color_conditions_2 = shuffle(Array(repeats).fill([[2, .1], [2, .1], [2, .1], [8, .1], [8, .1], [8, .1], [14, .1], [14, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks);  // no2 is for second condition (value/accuracy) delete too many trials from end
-    //
-    // var color_conditions = color_conditions_practice.concat(color_conditions_1);
-    // color_conditions = color_conditions.concat(color_conditions_2);
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // VERSION 4 fixed mean difference, manipulating variance, staircasing on hardest variance version
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var color_conditions_demo = [[40, .1666], [35, .1666], [30, .1666], [25, .1666], [20, .1666]]; // 5 super easy trials to begin
-    var color_conditions_practice1 = Array(trialsPractice1-color_conditions_demo.length).fill([[14, .1666]]).flat(1);
-    color_conditions_practice1 = color_conditions_demo.concat(color_conditions_practice1);
-    var color_conditions_practice2 = shuffle(Array(repeats_practice2).fill([[14, .1666], [14, .1666], [14, .1666], [14, .1], [14, .1], [14, .1], [14, .0333], [14, .0333], [14, .0333]]).flat(1)).slice(0, trialsPractice2);
-    color_conditions_practice = color_conditions_practice1.concat(color_conditions_practice2);
-    var color_conditions_1 = shuffle(Array(repeats).fill([[14, .1666], [14, .1666], [14, .1666], [14, .1], [14, .1], [14, .1], [14, .0333], [14, .0333], [14, .0333]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks); // no1 is for first condition (value/accuracy) delete too many trials from end
-    var color_conditions_2 = shuffle(Array(repeats).fill([[14, .1666], [14, .1666], [14, .1666], [14, .1], [14, .1], [14, .1], [14, .0333], [14, .0333], [14, .0333]]).flat(1)).slice(0, trialsPerBlock*numberOfBlocks);  // no2 is for second condition (value/accuracy) delete too many trials from end
-
-    var color_conditions = color_conditions_practice.concat(color_conditions_1);
-    color_conditions = color_conditions.concat(color_conditions_2);
+    const color_conditions = color_conditions_practice.concat(color_conditions_1, color_conditions_2, color_conditions_3, color_conditions_4, color_conditions_5, color_conditions_6, color_conditions_7, color_conditions_8, color_conditions_9);
 
 
     /* IMAGES TO PRELOAD */
@@ -382,25 +312,6 @@
         seeMore: 'practice1',  //not relevant that it has this weird name I think
     };
 
-    var Practice1B = {
-        type: 'jspsych-squircles',
-        canvasWidth: 500,
-        canvasHeight: 180,
-        leftColor: 'rgb(255,255,255)',
-        rightColor: 'rgb(255,255,255)',
-        waitTimeLimit: 2000,
-        isTutorialMode: true,
-        betterColor: "blue",            //red vs blue
-        condition: "practice1",         //continue button automatically triggered
-        trial_count: trialsPractice1,             //make trial count 80 here for staircase
-        yellowButtonEnabled: false,
-        yellowButtonName: 'SEE MORE',
-        greenButtonEnabled: true,
-        greenButtonName: 'FINAL DECISION',
-        redButtonEnabled: false,
-        seeMore: 'practice1',
-    };
-
     var Practice2R = {
         type: 'jspsych-squircles',
         canvasWidth: 500,
@@ -420,62 +331,6 @@
         seeMore: 'practice1',
     };
 
-    var Practice2B = {
-        type: 'jspsych-squircles',
-        canvasWidth: 500,
-        canvasHeight: 180,
-        leftColor: 'rgb(255,255,255)',
-        rightColor: 'rgb(255,255,255)',
-        waitTimeLimit: 2000,
-        isTutorialMode: true,           //true tutorial mode means that there won't be any forced see more or catch trials
-        betterColor: "blue",            //red vs blue
-        condition: "practice2",
-        trial_count: trialsPractice2,                 //trial count 5 here because it is only to show the task
-        yellowButtonEnabled: true,
-        yellowButtonName: 'SEE MORE',
-        greenButtonEnabled: true,
-        greenButtonName: 'FINAL DECISION',
-        redButtonEnabled: false,
-        seeMore: 'practice1',
-    };
-
-    var TaskVR = {
-        type: 'jspsych-squircles',
-        canvasWidth: 500,
-        canvasHeight: 180,
-        leftColor: 'rgb(255,255,255)',
-        rightColor: 'rgb(255,255,255)',
-        waitTimeLimit: 2000,
-        isTutorialMode: false,
-        betterColor: "red",            //red vs blue
-        condition: "value-value",       //value-value vs value-nothing
-        trial_count: trialsPerBlock,
-        yellowButtonEnabled: true,
-        yellowButtonName: 'SEE MORE',
-        greenButtonEnabled: true,
-        greenButtonName: 'FINAL DECISION',
-        redButtonEnabled: false,
-        seeMore: 'practice1',
-    };
-
-    var TaskVB = {
-        type: 'jspsych-squircles',
-        canvasWidth: 500,
-        canvasHeight: 180,
-        leftColor: 'rgb(255,255,255)',
-        rightColor: 'rgb(255,255,255)',
-        waitTimeLimit: 2000,
-        isTutorialMode: false,
-        betterColor: "blue",            //red vs blue
-        condition: "value-value",       //value-value vs value-nothing
-        trial_count: trialsPerBlock,
-        yellowButtonEnabled: true,
-        yellowButtonName: 'SEE MORE',
-        greenButtonEnabled: true,
-        greenButtonName: 'FINAL DECISION',
-        redButtonEnabled: false,
-        seeMore: 'practice1',
-    };
 
     var TaskNR = {
         type: 'jspsych-squircles',
@@ -496,41 +351,6 @@
         seeMore: 'practice1',
     };
 
-    var TaskNB = {
-        type: 'jspsych-squircles',
-        canvasWidth: 500,
-        canvasHeight: 180,
-        leftColor: 'rgb(255,255,255)',
-        rightColor: 'rgb(255,255,255)',
-        waitTimeLimit: 2000,
-        isTutorialMode: false,
-        betterColor: "blue",              //red vs blue
-        condition: "value-nothing",      //value-value vs value-nothing
-        trial_count: trialsPerBlock,               
-        yellowButtonEnabled: true,
-        yellowButtonName: 'SEE MORE',
-        greenButtonEnabled: true,
-        greenButtonName: 'FINAL DECISION',
-        redButtonEnabled: false,
-        seeMore: 'practice1',
-    };
-
-
-    var Instructions1B = {
-        type: 'jspsych-notice',
-        section1_text: 'In this experiment, you will be playing a game of comparing colours.',
-        section2_text: 'During this game, you will see 2 circles of coloured patches that will briefly flash on either side of the centre of the ' +
-            'screen (marked with a "+" sign). The patches will have colours ranging from <highlight style="color: rgb(255, 0, 0)">red</highlight> ' +
-            'to <highlight style="color: rgb(0, 100, 255)">blue</highlight>. Your task is to <u>decide which of the two circles ' +
-            'of coloured patches is more <highlight style="color: rgb(0, 100, 255)">blue</highlight> on average</u>, compared to the other one. ' +
-            'After seeing the circles flash on the screen, you can ' +
-            '<u>indicate your response and how confident you are</u> in your choice on a sliding scale ranging from "certainly left" to "certainly right". ' +
-            '<br><br>The task will <u>start off quite easy but will become harder</u> as you progress' +
-            '<br><br> Press the "continue" button to start the game. You ' +
-            'should reach a stable performance level to continue to the next phase.',
-        img_id: 'practice1B'
-    };
-
     var Instructions1R = {
         type: 'jspsych-notice',
         section1_text: 'In this experiment, you will be playing a game of comparing colours.',
@@ -546,17 +366,6 @@
         img_id: 'practice1R'
     };
 
-    var Instructions2B = {
-        type: 'jspsych-notice',
-        section1_text: 'Great! You have reached a stable performance level!',
-        section2_text: 'From now on, you will <u>only see 4 of the 8 coloured patches</u> making up each circle. This will make it harder for you to judge the average ' +
-            'circle colour. However, we are adding a <u>"see more" button</u> for you. If you are unsure of your response, you can click this button to <u>reveal all ' +
-            '8 colour patches</u> and briefly see the circles again before committing to a final decision. It is still important to respond as accurately as possible on ' +
-            'your first try though because <u>some trials will not have the "see more" option</u>. Moreover, <u>on some trials you will have to click the "see more" button</u> before ' +
-            'you can move on to the next trial. <br><br> Press the "continue" button to do a few practice trials before we move on to the next phase of the game.',
-        img_id: 'practice2B'
-    };
-
     var Instructions2R = {
         type: 'jspsych-notice',
         section1_text: 'Great! You have reached a stable performance level!',
@@ -566,42 +375,6 @@
             'your first try though because <u>some trials will not have the "see more" option</u>. Moreover, <u>on some trials you will have to click the "see more" button</u> before ' +
             'you can move on to the next trial. <br><br> Press the "continue" button to do a few practice trials before we move on to the next phase of the game.',
         img_id: 'practice2R'
-    };
-
-    var StartV1B = {
-        type: 'jspsych-notice',
-        section1_text: 'From now on you can earn points in the game!',
-        section2_text: 'Now that you have reached a stable performance level and practiced the task, you can start earning points in this ' +
-            'game. <u>The points will be converted into a monetary reward at the end of the experiment.</u> ' +
-            'The points you get <u>depend on the average colour of the circle you choose</u>. Points ' +
-            'range from 0 for the most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles to 10 for the most ' +
-            '<highlight style="color: rgb(0, 100, 255)">blue</highlight> circles, so you will <u>win more points if you choose the circle with ' +
-            'the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> colour patches.</u>',
-        img_id: 'value-valueB'
-    };
-
-    var StartV1R = {
-        type: 'jspsych-notice',
-        section1_text: 'From now on you can earn points in the game!',
-        section2_text: 'Now that you have reached a stable performance level and practiced the task, you can start earning points in this ' +
-            'game. <u>The points will be converted into a monetary reward at the end of the experiment.</u> ' +
-            'The points you get <u>depend on the average colour of the circle you choose</u>. Points ' +
-            'range from 0 for the most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles to 10 for the most ' +
-            '<highlight style="color: rgb(255, 0, 0)">red</highlight> circles, so you will <u>win more points if you choose the circle with ' +
-            'the more <highlight style="color: rgb(255, 0, 0)">red</highlight> colour patches.</u>',
-        img_id: 'value-valueR'
-    };
-
-    var StartN1B = {
-        type: 'jspsych-notice',
-        section1_text: 'From now on you can earn points in the game!',
-        section2_text: 'Now that you have reached a stable performance level and practiced the task, you can start earning points in this ' +
-            'game. <u>The points will be converted into a monetary reward at the end of the experiment.</u> ' +
-            'Points range from 0 for the most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles to 10 for the most ' +
-            '<highlight style="color: rgb(0, 100, 255)">blue</highlight> circles. ' +
-            'If your response is <u>CORRECT</u> (i.e. you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circle), you will <u>GAIN the points corresponding to the average colour of your chosen ' +
-            'circle</u>. If your response is <u>INCORRECT</u> (i.e. you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circle), <u>you will LOSE those points</u> instead.',
-        img_id: 'value-nothingB'
     };
 
     var StartN1R = {
@@ -614,44 +387,6 @@
             'If your response is <u>CORRECT</u> (i.e. you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circle), you will <u>GAIN the points corresponding to the average colour of your chosen ' +
             'circle</u>. If your response is <u>INCORRECT</u> (i.e. you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circle), <u>you will LOSE those points</u> instead.',
         img_id: 'value-nothingR'
-    };
-
-    var StartV2B = {
-        type: 'jspsych-notice',
-        section1_text: 'It\'s time for the last phase of the game!',
-        section2_text: 'The basic task is still the same as before - the points you get <u>depend on the average colour of the circle you choose</u>. ' +
-            'But from now on you will get the number of points associated with your ' +
-            'choice <u>no matter if it is correct or incorrect</u>. Points ' +
-            'range from 0 for the most <highlight style="color: rgb(255, 0, 0)">red</highlight>  circles to 10 for the most ' +
-            '<highlight style="color: rgb(0, 100, 255)">blue</highlight> circles, so you will <u>win more points if you choose the circle with ' +
-            'the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> colour patches.</u>',
-        img_id: 'value-valueB'
-    };
-
-    var StartV2R = {
-        type: 'jspsych-notice',
-        section1_text: 'It\'s time for the last phase of the game!',
-        section2_text: 'The basic task is still the same as before - the points you get <u>depend on the average colour of the circle you choose</u>. ' +
-            'But from now on you will get the number of points associated with your ' +
-            'choice <u>no matter if it is correct or incorrect</u>. Points ' +
-            'range from 0 for the most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles to 10 for the most ' +
-            '<highlight style="color: rgb(255, 0, 0)">red</highlight> circles, so you will <u>win more points if you choose the circle with ' +
-            'the more <highlight style="color: rgb(255, 0, 0)">red</highlight> colour patches.</u>',
-        img_id: 'value-valueR'
-    };
-
-    var StartN2B = {
-        type: 'jspsych-notice',
-        section1_text: 'It\'s time for the last phase of the game!',
-        section2_text: 'The basic task is still the same as before. ' +
-            'But from now on you will get the number of points associated with your ' +
-            'choice only if you make the CORRECT decision. Points range from 0 for the ' +
-            'most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles to 10 for the most ' +
-            '<highlight style="color: rgb(0, 100, 255)">blue</highlight> circles. ' +
-            'If your response is <u>CORRECT</u> (i.e. you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circle), you will ' +
-            '<u>GAIN the points corresponding to the average colour of the more ' +
-            '<highlight style="color: rgb(0, 100, 255)">blue</highlight> circle</u>. If your response is <u>INCORRECT, you will LOSE those points</u> instead.',
-        img_id: 'value-nothingB'
     };
 
     var StartN2R = {
@@ -668,45 +403,6 @@
         img_id: 'value-nothingR'
     };
 
-    var RestVB = {
-        type: 'jspsych-message-splash-image',
-        text: 'The most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles are worth 10 points. ' +
-            'The most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles are worth 0 points. ' +
-            'The marker on the confidence slider is <highlight style="color: rgb(0, 100, 255)">blue</highlight> to remind you ' +
-            'that <highlight style="color: rgb(0, 100, 255)">blue</highlight> is worth more. ' +
-            'The points will appear in <highlight style="color: rgb(255, 0, 0)">red</highlight> if you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> ' +
-            'circle and in <highlight style="color: rgb(0, 100, 255)">blue</highlight> if you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circle.' +
-            '<br><br> Let\'s look at a quick example.',
-        img_id: 'ScaleBlue',
-        buttonText: 'CONTINUE'
-    };
-
-    var RestVR = {
-        type: 'jspsych-message-splash-image',
-        text: 'The most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles are worth 10 points. ' +
-            'The most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles are worth 0 points. ' +
-            'The marker on the confidence slider is <highlight style="color: rgb(255, 0, 0)">red</highlight> to remind you ' +
-            'that <highlight style="color: rgb(255, 0, 0)">red</highlight> is worth more. ' +
-            'The points will appear in <highlight style="color: rgb(0, 100, 255)">blue</highlight> if you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> ' +
-            'circle and in <highlight style="color: rgb(255, 0, 0)">red</highlight> if you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circle.' +
-            '<br><br> Let\'s look at a quick example.',
-        img_id: 'ScaleRed',
-        buttonText: 'CONTINUE'
-    };
-
-    var RestNB = {
-        type: 'jspsych-message-splash-image',
-        text: 'The most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles are worth 10 points. ' +
-            'The most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles are worth 0 points. ' +
-            'The marker on the confidence slider is <highlight style="color: rgb(0, 100, 255)">blue</highlight> to remind you ' +
-            'that your task is to choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles. ' +
-            'The points will appear in <highlight style="color: rgb(255, 0, 0)">red</highlight> if you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> ' +
-            'circle and in <highlight style="color: rgb(0, 100, 255)">blue</highlight> if you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> circle.' +
-            '<br><br> Let\'s look at a quick example.',
-        img_id: 'ScaleBlue',
-        buttonText: 'CONTINUE'
-    };
-
     var RestNR = {
         type: 'jspsych-message-splash-image',
         text: 'The most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles are worth 10 points. ' +
@@ -720,26 +416,10 @@
         buttonText: 'CONTINUE'
     };
 
-
     var ExamplesNR = {
         type: 'jspsych-message-splash-examples',
         text: 'Press the "continue" button to do ' + numberOfBlocks + ' blocks of ' + trialsPerBlock + ' trials each. You will have a chance to take breaks between the blocks.',
         img_id: 'ExamplesAccuracy',
-        buttonText: 'CONTINUE'
-    };
-
-    var ExamplesVR = {
-        type: 'jspsych-message-splash-examples',
-        text: 'Press the "continue" button to do ' + numberOfBlocks + ' blocks of ' + trialsPerBlock + ' trials each. You will have a chance to take breaks between the blocks.',
-        img_id: 'ExamplesValue',
-        buttonText: 'CONTINUE'
-    };
-
-
-    var RestBGeneric = {
-        type: 'jspsych-message-splash-image',
-        text: 'You may take a break if you like. <br><br>Click "continue" when you are ready to move on to the next block of ' + trialsPerBlock + ' trials.',
-        img_id: 'ScaleBlue',
         buttonText: 'CONTINUE'
     };
 
@@ -788,75 +468,14 @@
 
     /* TIMELINES FOR RELEASE & TESTING */
     switch(trialTypeOrder) {
-        case 'VNR':
-            var timeline = [
-                // loading,
-                PIS,
-                consent,
-                demographics,
-                Instructions1R,
-                Practice1R,
-                Instructions2R,
-                Practice2R,
-                StartV1R,
-                RestVR,
-                ExamplesVR,
-                TaskVR, //block 1
-                RestRGeneric,
-                TaskVR, //block 2
-                RestRGeneric,
-                TaskVR, //block 3
-                StartN2R,
-                RestNR,
-                ExamplesNR,
-                TaskNR, //block1
-                RestRGeneric,
-                TaskNR, //block 2
-                RestRGeneric,
-                TaskNR, //block 3
-                ScoreReveal,
-                feedbackPoll,
-                thankYou
-            ];
-            break;
-
-        // case 'VNB':
-        //     var timeline = [
-        //         // loading,
-        //         PIS,
-        //         consent,
-        //         demographics,
-        //         Instructions1B,
-        //         Practice1B,
-        //         Instructions2B,
-        //         Practice2B,
-        //         StartV1B,
-        //         RestVB,
-        //         TaskVB, //block 1
-        //         RestBGeneric,
-        //         TaskVB, //block 2
-        //         RestBGeneric,
-        //         TaskVB, //block 3
-        //         StartN2B,
-        //         RestNB,
-        //         TaskNB, //block1
-        //         RestBGeneric,
-        //         TaskNB, //block 2
-        //         RestBGeneric,
-        //         TaskNB, //block 3
-        //         ScoreReveal,
-        //         feedbackPoll,
-        //         thankYou
-        //     ];
-        //     break;
 
         case 'NVR':
             var timeline = [
                 // loading,
-                PIS,
-                consent,
-                demographics,
-                Instructions1R,
+                // PIS,
+                // consent,
+                // demographics,
+                // Instructions1R,
                 Practice1R,
                 Instructions2R,
                 Practice2R,
@@ -868,79 +487,57 @@
                 TaskNR, //block 2
                 RestRGeneric,
                 TaskNR, //block 3
-                StartV2R,
-                RestVR,
-                ExamplesVR,
-                TaskVR, //block1
                 RestRGeneric,
-                TaskVR, //block 2
+                TaskNR, //block 4
                 RestRGeneric,
-                TaskVR, //block 3
+                TaskNR, //block 5
+                RestRGeneric,
+                TaskNR, //block 6
+                RestRGeneric,
+                TaskNR, //block 7
+                RestRGeneric,
+                TaskNR, //block 8
+                RestRGeneric,
+                TaskNR, //block 9
                 ScoreReveal,
                 feedbackPoll,
                 thankYou
             ];
             break;
 
-        // case 'NVB':
-        //     var timeline = [
-        //         // loading,
-        //         PIS,
-        //         consent,
-        //         demographics,
-        //         Instructions1B,
-        //         Practice1B,
-        //         Instructions2B,
-        //         Practice2B,
-        //         StartN1B,
-        //         RestNB,
-        //         TaskNB, //block 1
-        //         RestBGeneric,
-        //         TaskNB, //block 2
-        //         RestBGeneric,
-        //         TaskNB, //block 3
-        //         StartV2B,
-        //         RestVB,
-        //         TaskVB, //block1
-        //         RestBGeneric,
-        //         TaskVB, //block 2
-        //         RestBGeneric,
-        //         TaskVB, //block 3
-        //         ScoreReveal,
-        //         feedbackPoll,
-        //         thankYou
-        //     ];
-        //     break;
-
         case 'testing': //NVR
             var timeline = [
-                // Instructions2R,
-                // StartN1R,
+                // loading,
+                // PIS,
+                // consent,
+                // demographics,
+                // Instructions1R,
+                Practice1R,
+                Instructions2R,
+                Practice2R,
+                StartN1R,
                 RestNR,
-                StartV2R,
-                RestVR,
-                RestRGeneric
-                //Instructions1R,
-                // Practice1R,
-                // Instructions2R,
-                // Practice2R,
-                // StartN1R,
-                // RestNR,
-                // TaskNR, //block 1
-                // RestRGeneric,
-                // TaskNR, //block 2
-                // RestRGeneric,
-                // TaskNR, //block 3
-                // StartV2R,
-                // RestVR,
-                // TaskVR, //block1
-                // RestRGeneric,
-                // TaskVR, //block 2
-                // RestRGeneric,
-                // TaskVR, //block 3
-                // ScoreReveal,
-                // feedbackPoll,
-                // thankYou
+                ExamplesNR,
+                TaskNR, //block 1
+                RestRGeneric,
+                TaskNR, //block 2
+                RestRGeneric,
+                TaskNR, //block 3
+                RestRGeneric,
+                TaskNR, //block 4
+                RestRGeneric,
+                TaskNR, //block 5
+                RestRGeneric,
+                TaskNR, //block 6
+                RestRGeneric,
+                TaskNR, //block 7
+                RestRGeneric,
+                TaskNR, //block 8
+                RestRGeneric,
+                TaskNR, //block 9
+                ScoreReveal,
+                feedbackPoll,
+                thankYou
             ];
             break;
 
@@ -948,8 +545,8 @@
             var timeline = [loading];
     }
 
-    /* JSPSYCH*/
 
+    /* JSPSYCH*/
     jsPsych.init({
         timeline: timeline,
         preload_images: images,

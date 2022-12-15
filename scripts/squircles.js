@@ -72,15 +72,6 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
         }
     }
 
-    // difference = 0.008; //////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // // COMMENT THIS OUT; THIS IS JUST TO TRY OUT THE DIFFERENT STIMULI
-    // difference = 0.008; // 0.0111; // this is the median difference people get to
-    // var testConditions = [[2, .0333], [2, .0333], [2, .1], [2, .1666], [8, .0333], [8, .1], [8, .1666], [14, .0333], [14, .1], [14, .1666]];
-    // color_sd = testConditions[totalTrials][1];
-    // color_mean_level_dif = testConditions[totalTrials][0];
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //var difference = .05; //staircase 70% accuracy for 3*difference
     var color_means_a = [0.5];
@@ -101,19 +92,8 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
         color_mean_two_level = color_mean_level + color_mean_level_dif;
     }
 
-    // color_mean_level = 40; //////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // color_mean_two_level = 20; //////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // console.log("total trials " + totalTrials);
-    // console.log("color means " + color_means);
-
-
     var color_mean = color_means[color_mean_level];
     var color_mean_two = color_means[color_mean_two_level];
-
-    // console.log("color mean one "+ color_mean);
-    // console.log("color level one "+ color_mean_level);
-    // console.log("color mean two "+ color_mean_two);
-    // console.log("color level two "+ color_mean_two_level);
 
 
     var moreRedSide;
@@ -124,11 +104,6 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
         moreRedSide = 'right';
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // // COMMENT THIS OUT; THIS IS JUST TO TRY OUT THE DIFFERENT STIMULI
-    // moreRedSide = 'left';
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     console.log('color mean one: '+color_mean);
     console.log('color mean one level: '+color_mean_level);
     console.log('color mean two: '+color_mean_two);
@@ -137,7 +112,7 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
     console.log('more red side '+moreRedSide);
 
     //draw the squircle stimuli
-    var stimuli = drawSquircleStimuli(parent, canvasID, canvasWidth, canvasHeight, total_circles, radius,
+    let stimuli = drawSquircleStimuli(parent, canvasID, canvasWidth, canvasHeight, total_circles, radius,
         color_mean, color_sd, color_mean_two, moreRedSide);
     leftStimulus = stimuli[0];
     rightStimulus = stimuli[1];
@@ -227,29 +202,6 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
 
     //if we are not in tutorial mode, we cover half the stimuli
     if (isTutorialMode===false || condition === "practice2") {
-        //cover half of the stimuli
-        // var cover1 = createGeneral(
-        //     cover1,
-        //     document.getElementById('jspsych-canvas-sliders-response-stimulus'),
-        //     'div',
-        //     'grid-cover cover-left',
-        //     'grid-cover-left',
-        //     ''
-        // );
-        //
-        // var cover2 = createGeneral(
-        //     cover2,
-        //     document.getElementById('jspsych-canvas-sliders-response-stimulus'),
-        //     'div',
-        //     'grid-cover cover-right',
-        //     'grid-cover-right',
-        //     ''
-        // );
-        //
-        // $('.grid-cover').css('width', radius+20);
-        // $('.grid-cover.cover-right').css('right', radius+22);
-        // $('.grid-cover').css('visibility', 'visible');
-
 
         var coverCanvas = document.createElement('canvas');
         div = document.getElementById("jspsych-canvas-sliders-response-stimulus");
@@ -537,58 +489,6 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                             }
                         }
                     } else {
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // VERSION 2
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // if (condition === "value-value") {
-                        //     if (correctResponse) {
-                        //         if (betterColor === "red") {
-                        //             // get points of red stimulus
-                        //             points = round(0.1*(Math.max(color_mean_level, color_mean_two_level) + 1),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(255,0,0); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         } else {
-                        //             // get points of blue stimulus which is 100 - blue stim level
-                        //             points = round(0.1*(100-((Math.min(color_mean_level, color_mean_two_level)))),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(0,100,255); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         }
-                        //     } else {
-                        //         if (betterColor === "red") {
-                        //             // get points of blue stimulus
-                        //             points = round(0.1*(Math.min(color_mean_level, color_mean_two_level) + 1),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(0,100,255); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         } else if (betterColor === "blue")  {
-                        //             // get points of red stimulus which is 100 - red stim level
-                        //             points = round(0.1*(100-((Math.max(color_mean_level, color_mean_two_level)))),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(255,0,0); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         }
-                        //     }
-                        // } else {
-                        //     if (correctResponse) {
-                        //         if (betterColor === "red") {
-                        //             points = round(0.1*(Math.max(color_mean_level, color_mean_two_level) + 1),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(255,0,0); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         } else if (betterColor === "blue") {
-                        //             points = round(0.1*(100-((Math.min(color_mean_level, color_mean_two_level)))),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(0,100,255); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">+ '+ points + '</h1>';
-                        //         }
-                        //     } else {
-                        //         if (betterColor === "red") {
-                        //             points = round(-0.1*(Math.min(color_mean_level, color_mean_two_level) + 1),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(0,100,255); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">- '+ Math.abs(points) + '</h1>'; // only using the minus in the string and then the absolute point value here because otherwise the minus is difficult to see!
-                        //         } else if (betterColor === "blue")  {
-                        //             points = round(-0.1*(100-((Math.max(color_mean_level, color_mean_two_level)))),1);
-                        //             document.getElementById('confidence-question').innerHTML = '<h1 style="color: rgb(255,0,0); font-size: 5em; margin: -3vh auto 2vh; z-index: 100; -webkit-transform:translate3d(0,0,0);">- '+ Math.abs(points) + '</h1>';
-                        //         }
-
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // VERSION 3 "WIN" or "LOSE" points to make it more salient
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         if (condition === "value-value") {
                             if (correctResponse) {
                                 if (betterColor === "red") {
@@ -786,6 +686,17 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
         }
 
 
+        var costMessage = createGeneral(
+            costMessage,
+            document.getElementById('jspsych-content'),
+            'div',
+            '',
+            'costMessage',
+            ''
+        );
+        costMessage.innerHTML = "pay <highlight style=\"color:mediumspringgreen\">2 points</highlight> to change your mind";
+
+
         $('.scale-row').on({
             mousemove: function (event) {
                 var scaleOffsetLeft = cumulativeOffset(document.getElementById('scale')).left;
@@ -819,6 +730,40 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                         backendConfidence = 0;
                         displayedConfidence = 100 - backendConfidence;
                         document.body.style.setProperty('--displayedColor', lowerColor);
+                    }
+
+                    // change of mind cost message
+                    if (secondTimeAround === true && isTutorialMode == false) {
+                        if (confidences > 50) {
+                            if (moreRedSide === 'left') { // first response LEFT
+                                if (backendConfidence > 50) { // right, i.e. change of mind
+                                    costMessage.style.zIndex = "100";
+                                } else {
+                                    costMessage.style.zIndex = "-100"; // left, i.e. no change of mind
+                                }
+                            } else { // first response was RIGHT
+                                if (backendConfidence > 50) { // right, i.e. no change of mind
+                                    costMessage.style.zIndex = "-100";
+                                } else {
+                                    costMessage.style.zIndex = "100"; // left, i.e. change of mind
+                                }
+                            }
+                        } else {
+                            if (moreRedSide === 'left') { // first response RIGHT
+                                if (backendConfidence > 50) { // right, i.e. no change of mind
+                                    costMessage.style.zIndex = "-100";
+                                } else {
+                                    costMessage.style.zIndex = "100"; // left, i.e. change of mind
+                                }
+                            } else { // first response was LEFT
+                                if (backendConfidence > 50) { // right, i.e. change of mind
+                                    costMessage.style.zIndex = "100";
+                                } else {
+                                    costMessage.style.zIndex = "-100"; // left, i.e. no change of mind
+                                }
+                            }
+                        }
+
                     }
 
                     var barWidth = Math.abs((displayedConfidence - 50) * 0.5);
@@ -959,7 +904,7 @@ function drawFixation(parent, canvasWidth, canvasHeight, squircleStaircase, uppe
         parent.innerHTML += html;
 
         // call the draw squircles function
-        var stimuli = drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStaircase, upperColor, lowerColor, tooltipLabels, endLabels,  waitTimeLimit, fixationPeriod, stimulusPeriod, transitionPeriod, trialCount, trialCounterVariable, trialDataVariable, permanentDataVariable, isTutorialMode, accuracyThreshold, redButtonEnabled, redButtonName, yellowButtonEnabled, yellowButtonName, greenButtonEnabled, greenButtonName, condition, betterColor);
+        let stimuli = drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStaircase, upperColor, lowerColor, tooltipLabels, endLabels,  waitTimeLimit, fixationPeriod, stimulusPeriod, transitionPeriod, trialCount, trialCounterVariable, trialDataVariable, permanentDataVariable, isTutorialMode, accuracyThreshold, redButtonEnabled, redButtonName, yellowButtonEnabled, yellowButtonName, greenButtonEnabled, greenButtonName, condition, betterColor);
         leftStimulus = stimuli[0];
         rightStimulus = stimuli[1];
     }, fixationPeriod);
