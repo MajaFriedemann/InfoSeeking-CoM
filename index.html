@@ -116,14 +116,14 @@
 
 
     /* TRIAL TYPE ORDER */
-    trialTypeOrder = "testing";
+    trialTypeOrder = "NVR";
     // trialTypeOrder = "testing";
 
 
     /*set trial numbers*/
-    var trialsPractice1 = 6; // SET THIS TO 60
-    var trialsPractice2 = 3; // SET THIS TO 30
-    var trialsPerBlock = 3; //  SET THIS TO 54   // NEEDS TO BE SOMETHING DIVISIBLE BY 3
+    var trialsPractice1 = 60; // SET THIS TO 60
+    var trialsPractice2 = 30; // SET THIS TO 30
+    var trialsPerBlock = 54; //  SET THIS TO 54   // NEEDS TO BE SOMETHING DIVISIBLE BY 3
     var numberOfBlocks = 6;
 
     /*set colour conditions*/
@@ -497,9 +497,9 @@
         case 'NVR':
             var timeline = [
                 // loading,
-                // PIS,
-                // consent,
-                // demographics,
+                PIS,
+                consent,
+                demographics,
                 Instructions1R,
                 Practice1R,
                 Instructions2R,
@@ -530,9 +530,9 @@
         case 'testing': //NVR
             var timeline = [
                 // loading,
-                // PIS,
-                // consent,
-                // demographics,
+                PIS,
+                consent,
+                demographics,
                 Instructions1R,
                 Practice1R,
                 Instructions2R,
