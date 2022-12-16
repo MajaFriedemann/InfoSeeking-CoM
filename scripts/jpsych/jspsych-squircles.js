@@ -131,6 +131,7 @@ jsPsych.plugins['jspsych-squircles'] = (function () {
       rightStimulus: [],
       leftStimulusHalf: [],
       rightStimulusHalf: [],
+      com_cost: [],
 
       moreRedSide: [],
       confidences: [],

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3df47766-bd0d-44d8-9d5e-755754b7705f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/jpsych/jspsych-message-splash-com.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jpsych/jspsych-message-splash-image.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jpsych/jspsych-message-splash-image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jpsych/jspsych-squircles.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jpsych/jspsych-squircles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/squircles.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/squircles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/style.css" afterDir="false" />
     </list>
@@ -188,6 +190,7 @@
       <workItem from="1669999362177" duration="543000" />
       <workItem from="1670000124254" duration="663000" />
       <workItem from="1671111349895" duration="20444000" />
+      <workItem from="1671189518056" duration="11457000" />
     </task>
     <servers />
   </component>
@@ -210,11 +213,11 @@
       <screen x="-1920" y="0" width="1920" height="1152" />
     </state>
     <state x="-1828" y="92" width="1736" height="968" key="com.intellij.history.integration.ui.views.SelectionHistoryDialog/0.0.1536.816/-1920.0.1920.1152@-1920.0.1920.1152" timestamp="1668094560290" />
-    <state x="-1264" y="174" width="609" height="804" key="find.popup" timestamp="1671120013156">
+    <state x="-1264" y="174" width="609" height="804" key="find.popup" timestamp="1671205880323">
       <screen x="-1920" y="0" width="1920" height="1152" />
     </state>
     <state x="-1264" y="95" width="607" height="804" key="find.popup/0.0.1536.816/-1920.-79.1920.1152@-1920.-79.1920.1152" timestamp="1667070678762" />
-    <state x="-1264" y="174" width="609" height="804" key="find.popup/0.0.1536.816/-1920.0.1920.1152@-1920.0.1920.1152" timestamp="1671120013156" />
+    <state x="-1264" y="174" width="609" height="804" key="find.popup/0.0.1536.816/-1920.0.1920.1152@-1920.0.1920.1152" timestamp="1671205880323" />
     <state x="-1264" y="178" width="607" height="804" key="find.popup/0.0.1536.816/-1920.4.1920.1152@-1920.4.1920.1152" timestamp="1667251987733" />
     <state x="-1304" y="268" key="run.anything.popup" timestamp="1668097931209">
       <screen x="-1920" y="0" width="1920" height="1152" />

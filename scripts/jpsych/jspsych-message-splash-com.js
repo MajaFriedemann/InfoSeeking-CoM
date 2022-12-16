@@ -1,9 +1,9 @@
-jsPsych.plugins['jspsych-message-splash-image'] = (function(){
+jsPsych.plugins['jspsych-message-splash-com'] = (function(){
 
     var plugin = {};
 
     plugin.info = {
-        name: 'jspsych-message-splash-image',
+        name: 'jspsych-message-splash-com',
         prettyName: 'Message Splash with Image',
         parameters: {
             text: {
@@ -61,7 +61,9 @@ jsPsych.plugins['jspsych-message-splash-image'] = (function(){
             'div',
             'tutorial-text',
             'notice-text2',
-            '<div id="section2-text">' + trial.text + '</div>'
+            '<div id="section2-text">' + 'You may take a break if you like. <br><br>On this next block, changing your mind after seeing more will ' +
+            'cost <highlight style="color: mediumspringgreen">' + cost_conditions[totalTrials+1] + ' points</highlight> ' +
+            '<br><br>Click "continue" when you are ready to start this block of ' + trialsPerBlock + ' trials.' + '</div>'
         );
 
         $('.section2 .tutorial-text').css('font-size', '1.6vmax');

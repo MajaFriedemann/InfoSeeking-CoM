@@ -47,6 +47,7 @@
     <script src="scripts/jpsych/jspsych-loading.js"></script>
     <script src="scripts/jpsych/jspsych-message-splash.js"></script>
     <script src="scripts/jpsych/jspsych-message-splash-image.js"></script>
+    <script src="scripts/jpsych/jspsych-message-splash-com.js"></script>
     <script src="scripts/jpsych/jspsych-message-splash-examples.js"></script>
     <script src="scripts/jpsych/jspsych-notice.js"></script>
     <script src="scripts/jpsych/jspsych-PIS.js"></script>
@@ -90,6 +91,7 @@
     var rightStimulus;
     var leftStimulusHalf;
     var rightStimulusHalf;
+    var com_cost;
 
 
     /* SEEDED RANDOMISATION
@@ -118,12 +120,13 @@
     // trialTypeOrder = "testing";
 
 
-    /*set trial types (mean diff x variance conditions) to make sure they are balanced*/
+    /*set trial numbers*/
     var trialsPractice1 = 6; // SET THIS TO 60
     var trialsPractice2 = 3; // SET THIS TO 30
-    var trialsPerBlock = 3; //  SET THIS TO 36 (9 block, i.e. 324 trials, same as before where we had 54 trials and 6 blocks)  // NEEDS TO BE SOMETHING DIVISIBLE BY 3
-    var numberOfBlocks = 9;
+    var trialsPerBlock = 3; //  SET THIS TO 54   // NEEDS TO BE SOMETHING DIVISIBLE BY 3
+    var numberOfBlocks = 6;
 
+    /*set colour conditions*/
     var repeats_practice2 = Math.ceil(trialsPractice2 / 9);
     var repeats = Math.ceil(trialsPerBlock / 3); // divided by 3 for the 3 mean levels (1,3,5)
 
@@ -139,12 +142,14 @@
     var color_conditions_4 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 4
     var color_conditions_5 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 5
     var color_conditions_6 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 6
-    var color_conditions_7 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 7
-    var color_conditions_8 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 8
-    var color_conditions_9 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 9
 
-    const color_conditions = color_conditions_practice.concat(color_conditions_1, color_conditions_2, color_conditions_3, color_conditions_4, color_conditions_5, color_conditions_6, color_conditions_7, color_conditions_8, color_conditions_9);
+    const color_conditions = color_conditions_practice.concat(color_conditions_1, color_conditions_2, color_conditions_3, color_conditions_4, color_conditions_5, color_conditions_6);
 
+    /*set change of mind cost conditions*/
+    var cost_conditions = new Array(color_conditions_practice.length).fill(0);
+    var costs = shuffle([0.5, 0.5, 1.5, 1.5, 3, 3]);
+    costs = costs.flatMap(x => Array(trialsPerBlock).fill(x));
+    cost_conditions = cost_conditions.concat(costs);
 
     /* IMAGES TO PRELOAD */
     var images = [
@@ -242,6 +247,7 @@
         rightStimulus: [],
         leftStimulusHalf: [],
         rightStimulusHalf: [],
+        com_cost: [],
         points: [],
         cumulativePoints: [],
         moreAsked: [],
@@ -360,8 +366,8 @@
             'of coloured patches is more <highlight style="color: rgb(255, 0, 0)">red</highlight> on average</u>, compared to the other one. ' +
             'After seeing the circles flash on the screen, you can ' +
             '<u>indicate your response and how confident you are</u> in your choice on a sliding scale ranging from "certainly left" to "certainly right". ' +
-            '<br><br>The task will <u>start off quite easy but will become harder</u> as you progress' +
-            '<br><br> Press the "continue" button to start the game. You ' +
+            '<br><br>The task will <u>start off quite easy but will become harder</u> as you progress. ' +
+            'Press the "continue" button to start the game. You ' +
             'should reach a stable performance level to continue to the next phase.',
         img_id: 'practice1R'
     };
@@ -370,11 +376,32 @@
         type: 'jspsych-notice',
         section1_text: 'Great! You have reached a stable performance level!',
         section2_text: 'From now on, you will <u>only see 4 of the 8 coloured patches</u> making up each circle. This will make it harder for you to judge the average ' +
-            'circle colour. However, we are adding a <u>"see more" button</u> for you. If you are unsure of your response, you can click this button to <u>reveal all ' +
-            '8 colour patches</u> and briefly see the circles again before committing to a final decision. It is still important to respond as accurately as possible on ' +
-            'your first try though because <u>some trials will not have the "see more" option</u>. Moreover, <u>on some trials you will have to click the "see more" button</u> before ' +
-            'you can move on to the next trial. <br><br> Press the "continue" button to do a few practice trials before we move on to the next phase of the game.',
+            'circle colour. However, we are adding a <highlight style="color: #ff920d"><u>"see more" </u></highlight>button for you. If you are unsure of your response, you can click this button to <u>reveal all ' +
+            '8 colour patches</u> and briefly see the circles again before committing to a final decision. <br><br> It is still important to respond as accurately as possible on ' +
+            'your first try though because <u>some trials will not have the <highlight style="color: #ff920d">"see more" </highlight> option</u>. Moreover, <u>on some trials you will have ' +
+            'to click the <highlight style="color: #ff920d">"see more"</highlight> button</u> before ' +
+            'you can move on to the next trial.',
         img_id: 'practice2R'
+    };
+
+    var Instructions2Rcom = {
+        type: 'jspsych-message-splash-image',
+        text: 'When you click the <highlight style="color: #ff920d">"see more" </highlight> button, and after seeing all 8 colour patches you decide that you want ' +
+            'to <highlight style="color: mediumspringgreen">change your mind</highlight> (e.g. on your first choice you thought that ' +
+            'the left circle looks more <highlight style="color: rgb(255, 0, 0)">red</highlight> on average ' +
+            'but after seeing more you now think that actually the right circle is more <highlight style="color: rgb(255, 0, 0)">red</highlight>), you will ' +
+            'have to <highlight style="color: mediumspringgreen">pay in points</highlight> which make up your monetary reward.',
+        img_id: 'practice2R',
+        buttonText: 'CONTINUE'
+    };
+
+    var Instructions2Rcom2 = {
+        type: 'jspsych-message-splash-image',
+        text: 'How do you get points and how much do you have to pay? We will get into this in a bit! For now, changing your mind ' +
+            'costs <highlight style="color: mediumspringgreen">0 points</highlight> and you can just try out the <highlight style="color: #ff920d">"see more"</highlight> option as you like.' +
+            ' <br><br> Press the "continue" button to do some practice trials with the <highlight style="color: #ff920d">"see more"</highlight> option.',
+        img_id: 'practice2R',
+        buttonText: 'CONTINUE'
     };
 
     var StartN1R = {
@@ -407,10 +434,8 @@
         type: 'jspsych-message-splash-image',
         text: 'The most <highlight style="color: rgb(255, 0, 0)">red</highlight> circles are worth 10 points. ' +
             'The most <highlight style="color: rgb(0, 100, 255)">blue</highlight> circles are worth 0 points. ' +
-            'The marker on the confidence slider is <highlight style="color: rgb(255, 0, 0)">red</highlight> to remind you ' +
-            'that you task is to choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circles. ' +
-            'The points will appear in <highlight style="color: rgb(0, 100, 255)">blue</highlight> if you choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> ' +
-            'circle and in <highlight style="color: rgb(255, 0, 0)">red</highlight> if you choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circle.' +
+            '<br><br> The points will appear in <highlight style="color: rgb(0, 100, 255)">blue</highlight> if you incorrectly choose the more <highlight style="color: rgb(0, 100, 255)">blue</highlight> ' +
+            'circle and in <highlight style="color: rgb(255, 0, 0)">red</highlight> if you correctly choose the more <highlight style="color: rgb(255, 0, 0)">red</highlight> circle.' +
             '<br><br> Let\'s look at a quick example.',
         img_id: 'ScaleRed',
         buttonText: 'CONTINUE'
@@ -424,8 +449,8 @@
     };
 
     var RestRGeneric = {
-        type: 'jspsych-message-splash-image',
-        text: 'You may take a break if you like. <br><br>Click "continue" when you are ready to move on to the next block of ' + trialsPerBlock + ' trials.',
+        type: 'jspsych-message-splash-com',
+        text: '', // Done in the js file itself to have updating text for each block
         img_id: 'ScaleRed',
         buttonText: 'CONTINUE'
     };
@@ -475,13 +500,16 @@
                 // PIS,
                 // consent,
                 // demographics,
-                // Instructions1R,
+                Instructions1R,
                 Practice1R,
                 Instructions2R,
+                Instructions2Rcom,
+                Instructions2Rcom2,
                 Practice2R,
                 StartN1R,
                 RestNR,
                 ExamplesNR,
+                RestRGeneric,
                 TaskNR, //block 1
                 RestRGeneric,
                 TaskNR, //block 2
@@ -493,12 +521,6 @@
                 TaskNR, //block 5
                 RestRGeneric,
                 TaskNR, //block 6
-                RestRGeneric,
-                TaskNR, //block 7
-                RestRGeneric,
-                TaskNR, //block 8
-                RestRGeneric,
-                TaskNR, //block 9
                 ScoreReveal,
                 feedbackPoll,
                 thankYou
@@ -511,13 +533,16 @@
                 // PIS,
                 // consent,
                 // demographics,
-                // Instructions1R,
+                Instructions1R,
                 Practice1R,
                 Instructions2R,
+                Instructions2Rcom,
+                Instructions2Rcom2,
                 Practice2R,
                 StartN1R,
                 RestNR,
                 ExamplesNR,
+                RestRGeneric,
                 TaskNR, //block 1
                 RestRGeneric,
                 TaskNR, //block 2
@@ -529,12 +554,6 @@
                 TaskNR, //block 5
                 RestRGeneric,
                 TaskNR, //block 6
-                RestRGeneric,
-                TaskNR, //block 7
-                RestRGeneric,
-                TaskNR, //block 8
-                RestRGeneric,
-                TaskNR, //block 9
                 ScoreReveal,
                 feedbackPoll,
                 thankYou

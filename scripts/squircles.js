@@ -57,6 +57,8 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
     // disable the cursor
     $('.jspsych-content').css('cursor', 'none');
 
+    // determine the cost condition
+    com_cost = cost_conditions[totalTrials];
 
     // determine the parameters for the squircles
     var total_circles = 8;
@@ -454,6 +456,7 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                     trialDataVariable['rightStimulus'].push(rightStimulus);
                     trialDataVariable['leftStimulusHalf'].push(leftStimulusHalf);
                     trialDataVariable['rightStimulusHalf'].push(rightStimulusHalf);
+                    trialDataVariable['com_cost'].push(com_cost);
                     trialDataVariable['moreRedSide'].push(moreRedSide);
                     trialDataVariable['confidences'].push(confidences);
                     trialDataVariable['secondConfidences'].push(secondConfidences);
@@ -611,6 +614,7 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                                         permanentDataVariable['rightStimulus'].push(trialDataVariable["rightStimulus"]);
                                         permanentDataVariable['leftStimulusHalf'].push(trialDataVariable["leftStimulusHalf"]);
                                         permanentDataVariable['rightStimulusHalf'].push(trialDataVariable["rightStimulusHalf"]);
+                                        permanentDataVariable['com_cost'].push(trialDataVariable["com_cost"]);
                                         permanentDataVariable["moreRedSide"].push(trialDataVariable["moreRedSide"]);
                                         permanentDataVariable["confidences"].push(trialDataVariable["confidences"]);
                                         permanentDataVariable["secondConfidences"].push(trialDataVariable["secondConfidences"]);
@@ -658,6 +662,7 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                                 permanentDataVariable['rightStimulus'].push(trialDataVariable["rightStimulus"]);
                                 permanentDataVariable['leftStimulusHalf'].push(trialDataVariable["leftStimulusHalf"]);
                                 permanentDataVariable['rightStimulusHalf'].push(trialDataVariable["rightStimulusHalf"]);
+                                permanentDataVariable['com_cost'].push(trialDataVariable["com_cost"]);
                                 permanentDataVariable["moreRedSide"].push(trialDataVariable["moreRedSide"]);
                                 permanentDataVariable["confidences"].push(trialDataVariable["confidences"]);
                                 permanentDataVariable["secondConfidences"].push(trialDataVariable["secondConfidences"]);
@@ -694,7 +699,7 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
             'costMessage',
             ''
         );
-        costMessage.innerHTML = "pay <highlight style=\"color:mediumspringgreen\">2 points</highlight> to change your mind";
+        costMessage.innerHTML = 'pay <highlight style=\"color:mediumspringgreen\">' + com_cost + ' points</highlight> to change your mind';
 
 
         $('.scale-row').on({
@@ -733,16 +738,17 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                     }
 
                     // change of mind cost message
-                    if (secondTimeAround === true && isTutorialMode == false) {
+                    // if (secondTimeAround === true && isTutorialMode == false) {
+                    if (secondTimeAround === true) {
                         if (confidences > 50) {
                             if (moreRedSide === 'left') { // first response LEFT
-                                if (backendConfidence > 50) { // right, i.e. change of mind
+                                if (backendConfidence > 51) { // right, i.e. change of mind
                                     costMessage.style.zIndex = "100";
                                 } else {
                                     costMessage.style.zIndex = "-100"; // left, i.e. no change of mind
                                 }
                             } else { // first response was RIGHT
-                                if (backendConfidence > 50) { // right, i.e. no change of mind
+                                if (backendConfidence > 50.5) { // right, i.e. no change of mind
                                     costMessage.style.zIndex = "-100";
                                 } else {
                                     costMessage.style.zIndex = "100"; // left, i.e. change of mind
@@ -750,13 +756,13 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
                             }
                         } else {
                             if (moreRedSide === 'left') { // first response RIGHT
-                                if (backendConfidence > 50) { // right, i.e. no change of mind
+                                if (backendConfidence > 50.5) { // right, i.e. no change of mind
                                     costMessage.style.zIndex = "-100";
                                 } else {
                                     costMessage.style.zIndex = "100"; // left, i.e. change of mind
                                 }
                             } else { // first response was LEFT
-                                if (backendConfidence > 50) { // right, i.e. change of mind
+                                if (backendConfidence > 50.5) { // right, i.e. change of mind
                                     costMessage.style.zIndex = "100";
                                 } else {
                                     costMessage.style.zIndex = "-100"; // left, i.e. no change of mind

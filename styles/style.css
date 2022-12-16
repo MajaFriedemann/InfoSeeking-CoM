@@ -286,7 +286,7 @@ section.tutorial-section.section2 .tutorial-text, .section.tutorial-section.sect
   width: 40vw;
   height: 40vw;
   margin-top: 10vh;
-  font-size: 1.3vmax;
+  font-size: 1.5vmax;
   line-height: 2.5vmax;
 }
 
@@ -297,7 +297,7 @@ section.tutorial-section.section3, .section.tutorial-section.section3 {
 
 section.tutorial-section.section4, .section.tutorial-section.section4 {
   background-color: rgb(31, 130, 128);
-  font-size: 2vmax;
+  font-size: 1.8vmax;
   font-weight: 900;
   text-align: center;
 }
@@ -787,6 +787,7 @@ button.default-green-button, .button.default-green-button {
   color: black;
   font-size: 2vmin;
   animation: glowy-box 0.5s infinite alternate;
+  margin-bottom: 5%;
 }
 
 button.default-green-button.start-tutorial, .button.default-green-button.start-tutorial {
