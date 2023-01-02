@@ -127,7 +127,7 @@
     var numberOfBlocks = 6;
 
     /*set colour conditions*/
-    var repeats_practice2 = Math.ceil(trialsPractice2 / 9);
+    var repeats_practice2 = Math.ceil(trialsPractice2 / 3);
     var repeats = Math.ceil(trialsPerBlock / 3); // divided by 3 for the 3 mean levels (1,3,5)
 
     var color_conditions_demo = [[40, .1], [40, .1], [30, .1], [30, .1], [20, .1]]; // 5 super easy trials to begin
@@ -143,13 +143,17 @@
     var color_conditions_5 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 5
     var color_conditions_6 = shuffle(Array(repeats).fill([[2, .1], [8, .1], [14, .1]]).flat(1)).slice(0, trialsPerBlock); // block 6
 
-    const color_conditions = color_conditions_practice.concat(color_conditions_1, color_conditions_2, color_conditions_3, color_conditions_4, color_conditions_5, color_conditions_6);
+    var color_conditions = color_conditions_practice.concat(color_conditions_1, color_conditions_2, color_conditions_3, color_conditions_4, color_conditions_5, color_conditions_6);
 
     /*set change of mind cost conditions*/
     var cost_conditions = new Array(color_conditions_practice.length).fill(0);
     var costs = shuffle([0.5, 0.5, 1.5, 1.5, 3, 3]);
     costs = costs.flatMap(x => Array(trialsPerBlock).fill(x));
     cost_conditions = cost_conditions.concat(costs);
+
+    // for safety
+    color_conditions = color_conditions.concat([0]);
+    cost_conditions = cost_conditions.concat([0]);
 
     /* IMAGES TO PRELOAD */
     var images = [
