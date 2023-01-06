@@ -121,7 +121,7 @@
 
 
     /*set trial numbers*/
-    var trialsPractice1 = 60; // SET THIS TO 60
+    var trialsPractice1 = 10; // SET THIS TO 60
     var trialsPractice2 = 30; // SET THIS TO 30
     var trialsPerBlock = 54; //  SET THIS TO 54   // NEEDS TO BE SOMETHING DIVISIBLE BY 3
     var numberOfBlocks = 6;
@@ -168,7 +168,7 @@
     var info_conditions_5 = determineInfoTrials(color_conditions_5.slice(), nForcedSeeMoreTrials, nContinueTrials);
     var info_conditions_6 = determineInfoTrials(color_conditions_6.slice(), nForcedSeeMoreTrials, nContinueTrials);
 
-    var info_conditions = info_conditions_practice.concat(color_conditions_1, info_conditions_2, info_conditions_3, info_conditions_4, info_conditions_5, info_conditions_6);
+    var info_conditions = info_conditions_practice.concat(info_conditions_1, info_conditions_2, info_conditions_3, info_conditions_4, info_conditions_5, info_conditions_6);
 
     // for safety
     color_conditions = color_conditions.concat([0]);

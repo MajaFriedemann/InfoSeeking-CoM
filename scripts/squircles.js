@@ -123,9 +123,11 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
     // set trial type to normal / forced see more / forced continue (ie catch trial)
     if (info_conditions[totalTrials][0]===100) {
         forcedSeeMore = true;
+        forcedSeeMoreTemp = true;
     }
     if (info_conditions[totalTrials][0]===200) {
         forcedContinue = true;
+        yellowButtonEnabled = false;
     }
 
 
