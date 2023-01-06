@@ -119,27 +119,39 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
     leftStimulus = stimuli[0];
     rightStimulus = stimuli[1];
 
-    if (isTutorialMode === false) {
-        //catch trials (5% of trials (1% is lost below))
-        var catchRandomiser = Math.random();
-        if (catchRandomiser > 0.94) {
-            forcedContinue = true;
-            yellowButtonEnabled = false;
-        }
-        //forced see more trials (15% of trials)
-        var forcedRandomiser = Math.random();
-        if (forcedRandomiser > 0.84) {
-            forcedSeeMore = true;
-            forcedSeeMoreTemp = true;
-        }
-        //ensure that it doesnt happen that there is no button at all (loosing 1%)
-        if (yellowButtonEnabled === false && forcedSeeMoreTemp === true) {
-            yellowButtonEnabled = true;
-            forcedSeeMore = false;
-            forcedSeeMoreTemp = false;
-            forcedContinue = false;
-        }
+
+    // set trial type to normal / forced see more / forced continue (ie catch trial)
+    if (info_conditions[totalTrials][0]===100) {
+        forcedSeeMore = true;
     }
+    if (info_conditions[totalTrials][0]===200) {
+        forcedContinue = true;
+    }
+
+
+    // OLD RANDOM WAY OF DETERMINING TRIAL TYPE. NOW IT IS CONTROLLED TO BE COUNTERBALANCED ACROSS COST CONDITIONS
+    // if (isTutorialMode === false) {
+    //     //catch trials (5% of trials (1% is lost below))
+    //     var catchRandomiser = Math.random();
+    //     if (catchRandomiser > 0.94) {
+    //         forcedContinue = true;
+    //         yellowButtonEnabled = false;
+    //     }
+    //     //forced see more trials (15% of trials)
+    //     var forcedRandomiser = Math.random();
+    //     if (forcedRandomiser > 0.84) {
+    //         forcedSeeMore = true;
+    //         forcedSeeMoreTemp = true;
+    //     }
+    //     //ensure that it doesnt happen that there is no button at all (loosing 1%)
+    //     if (yellowButtonEnabled === false && forcedSeeMoreTemp === true) {
+    //         yellowButtonEnabled = true;
+    //         forcedSeeMore = false;
+    //         forcedSeeMoreTemp = false;
+    //         forcedContinue = false;
+    //     }
+    // }
+
 
     var buttonsToShow = {};
     if (redButtonEnabled) {

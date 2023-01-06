@@ -266,6 +266,101 @@
 //   };
 // }
 
+
+
+ /* info conditions helper function */
+ function determineInfoTrials(array, n1, n2){
+   // Find the indices of all elements containing 14
+   let indices = array.map((elem, index) => elem[0] === 14 ? index : -1).filter(index => index !== -1);
+
+   // Select n1 random indices from the list of indices
+   let selectedIndices = [];
+   for (let i = 0; i < n1; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+   // Replace the elements at the selected indices with 100
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [100, .1]);
+   }
+
+   // Select n2 random indices from the remaining list of indices
+   selectedIndices = [];
+   for (let i = 0; i < n2; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+    // Replace the elements at the selected indices with 200
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [200, .1]);
+   }
+
+    // Find the indices of all elements containing 8
+   indices = array.map((elem, index) => elem[0] === 8 ? index : -1).filter(index => index !== -1);
+
+    // Select n1 random indices from the list of indices
+   selectedIndices = [];
+   for (let i = 0; i < n1; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+    // Replace the elements at the selected indices with 100
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [100, .1]);
+   }
+
+    // Select n2 random indices from the remaining list of indices
+   selectedIndices = [];
+   for (let i = 0; i < n2; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+    // Replace the elements at the selected indices with 200
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [200, .1]);
+   }
+
+   // Find the indices of all elements containing 2
+   indices = array.map((elem, index) => elem[0] === 2 ? index : -1).filter(index => index !== -1);
+
+   // Select n1 random indices from the list of indices
+   selectedIndices = [];
+   for (let i = 0; i < n1; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+   // Replace the elements at the selected indices with 100
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [100, .1]);
+   }
+
+   // Select n2 random indices from the remaining list of indices
+   selectedIndices = [];
+   for (let i = 0; i < n2; i++) {
+     let index = indices[Math.floor(Math.random() * indices.length)];
+     selectedIndices.push(index);
+     indices.splice(indices.indexOf(index), 1); // remove the selected index from the list of indices to prevent duplicates
+   }
+
+   // Replace the elements at the selected indices with 200
+   for (let index of selectedIndices) {
+     array.splice(index, 1, [200, .1]);
+   }
+   return array
+ }
+
+
+
  /******************
  * BASIC FUNCTIONS
  *******************/
@@ -544,7 +639,30 @@ function randIntGen(intervalsArray) {
   return outputArray;
 }
 
-/* remove hash from URL without reloading the page */
+
+
+function replaceRandInts(array, toReplace, replaceWith){
+  const indices = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i][0] === toReplace) {
+      indices.push(i);
+    }
+  }
+
+  shuffle(indices);
+
+  for (let i = 0; i < 2; i++) {
+    array[indices[i]][0] = replaceWith[0];
+  }
+
+  for (let i = 2; i < 4; i++) {
+    array[indices[i]][0] = replaceWith[1];
+  }
+
+}
+
+
+ /* remove hash from URL without reloading the page */
 function removeHash() {
   var scrollV, scrollH, loc = window.location;
   if ("pushState" in history) {
