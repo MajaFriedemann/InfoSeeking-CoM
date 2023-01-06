@@ -156,8 +156,8 @@
 
     /*set forced see more and forced continue trials*/
     // 0 = normal trial, 100 = forced see more trial, 200 = forced continue trial
-    var nForcedSeeMoreTrials = Math.round(0.20*trialsPerBlock / 3);
-    var nContinueTrials = Math.round(0.05*trialsPerBlock / 3);
+    var nForcedSeeMoreTrials = Math.round(0.20*trialsPerBlock / 3); // 20 percent forced see more
+    var nContinueTrials = Math.round(0.05*trialsPerBlock / 3); // 5 percent forced continue
 
     var info_conditions_practice = [...Array(trialsPractice1+trialsPractice2)].map(() => [0, 0]);
 
