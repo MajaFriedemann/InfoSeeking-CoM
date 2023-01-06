@@ -124,10 +124,12 @@ function drawSquircles(parent, canvasID, canvasWidth, canvasHeight, squircleStai
     if (info_conditions[totalTrials][0]===100) {
         forcedSeeMore = true;
         forcedSeeMoreTemp = true;
-    }
-    if (info_conditions[totalTrials][0]===200) {
+        yellowButtonEnabled = true;
+    } else if (info_conditions[totalTrials][0]===200) {
         forcedContinue = true;
         yellowButtonEnabled = false;
+    } else {
+        yellowButtonEnabled = true;
     }
 
 
