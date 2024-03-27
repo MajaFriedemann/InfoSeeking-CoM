@@ -1,3 +1,3 @@
 # About this project
 
-Code for Study 10
+Code for DPhil Study 10
